@@ -16,7 +16,7 @@ func GenerateJWT(userId string) string {
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"user_id": userId,
-		"exp":     time.Now().Add(time.Hour * time.Duration(config.JWT_EXPIRY_HOURS)),
+		"exp":     time.Now().Add(time.Hour * time.Duration(config.JWT_EXPIRY_HOURS)).Unix(),
 	})
 	tokenString, err := token.SignedString([]byte(secretKey))
 	if err != nil {
